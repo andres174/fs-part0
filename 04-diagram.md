@@ -1,14 +1,22 @@
 sequenceDiagram
+    participant user
     participant browser
     participant server
-    participant user
-
-    Note right of browser: User interacts with the web page
-
+    
     user->browser: Open https://studies.cs.helsinki.fi/exampleapp/notes
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: CSS file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: JS file
     deactivate server
 
     user->browser: Write note in text field
@@ -20,5 +28,3 @@ sequenceDiagram
     deactivate server
 
     browser-->>user: Confirmation message
-
-    Note right of browser: The browser may update the UI to reflect the new note
